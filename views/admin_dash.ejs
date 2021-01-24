@@ -1,0 +1,21 @@
+<%- include('admin/header') %>
+
+<!-- create user -->
+<% if ( typeof createuser != 'undefined') {%>
+<%- include('admin/createuser') %>
+<%  }   %> 
+<!-- create user -->
+
+<!-- All users -->
+<% if ( typeof allusers != 'undefined') {%>
+    <%- include('admin/allusers') %>
+    <%  }   %> 
+<!-- All user -->
+
+    <!-- Modify user -->
+<% if ( typeof modifyuser != 'undefined' ) {%>
+    <%- include('admin/modifyuser') %>
+    <%  }   %> 
+    <!-- Modify user -->
+
+<%- include('admin/footer') %> 

@@ -1,0 +1,81 @@
+<div class="container">
+    <h1 class="display-4 text-center p-4 mb-3"><span class="text-primary">Login</span> Portal</h1>
+    <hr>
+    <div class="row m-6 row-cols-10">
+        <div class="card card-body">
+            <h2 class="text-danger text-center">Can't Log in?</h2>
+            
+            <p class="text-secondary text-center">
+                Having trouble to log in or Don't and account? <br>
+                Please contact with office. <br>
+                Contact Info:
+            </p>
+        </div>
+        <div class="card card-body ">
+            <div class="form-group mx-auto" >
+            <h2 class="text-center text-primary">Logging as...</h2>
+  
+                <form action="/login">
+                    <select class="custom-select my-2 mr-sm-2" name="role" required>
+                        <option value="" selected>Choose...</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="employee">Employee</option>
+                    </select>
+                    <div class="form-group">
+                        <label for="id">ID Number</label>
+                        <input type="text" name="id" class="form-control my-1 mr-2" required>
+                    </div>
+                    <div><p class="id error text-warning"></p></div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control my-1 mr-2" required>
+                    </div>
+                    <div><p class="password error text-warning"></p></div>
+                    <Button class="btn btn-primary btn-block">Login</Button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+ 
+    <script>
+        const form = document.querySelector('form');
+        const idError = document.querySelector('.id.error');
+        const passwordError = document.querySelector('.password.error');
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          // reset errors
+          idError.textContent = '';
+          passwordError.textContent = '';
+          // get values
+          const role = form.role.value;
+          const id = form.id.value;
+          const password = form.password.value;
+          try {
+            const res = await fetch('/login', { 
+              method: 'POST', 
+              body: JSON.stringify({ role, id, password }),
+              headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            console.log(data);
+            if (data.errors) {
+              idError.textContent = data.errors.id;
+              passwordError.textContent = data.errors.password;
+            }
+            if (data.role === 'student') {
+              location.assign('/student');
+            }
+            if (data.role === 'teacher') {
+              location.assign('/teacher');
+            }
+            if (data.role === 'employee') {
+              location.assign('/employee');
+            }
+          }
+          catch (err) {
+            console.log(err);
+          }
+        });
+      </script>

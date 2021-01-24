@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="card card-body">
+      <div>
+        <h2 class="title">Find user by ID</h2>
+        <form class="form-inline mb-4" id="search">
+            <input id="searchKEY" type="text" class="form-control mr-2">
+            <select class="custom-select my-2 mr-sm-2" id="role" name="role">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="employee">Employee</option>
+            </select>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+        <h3 class="title">Users</h3>
+    
+        <table class="table table-hover">
+            <thead>
+              <tr class="table-active">
+                <th scope="col">Type</th>
+                <th scope="col">Name</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <!-- EJS LIST OF USER  -->
+            <% if(typeof userinfo != 'undefined') { %> 
+                <% userinfo.forEach((user)=>{ %>
+                    <tbody>
+                        <tr>
+                          <th scope="row"><%= user.role.toUpperCase() %> </th>
+                          <td><%= user.name %></td>
+                          <td><%= user.id %></td>
+                          <td><%= user.email %></td>
+                        </tr>
+                      </tbody>
+                <%}) %>  
+            <% } %> 
+            <!-- END -->
+          </table>
+        <br>
+      </div>
+    </div>  
+    </div>
