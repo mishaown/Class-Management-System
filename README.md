@@ -2,7 +2,9 @@
 
 Class Management System in form of web application using Node.js, Express and MongoDB
 
-*************************
+**************************************************************************
+                         DEVELOPMENT ONGOING....
+**************************************************************************
 To start the project.
 
 1. create file and name it '.env' and type following texts
@@ -24,20 +26,29 @@ Develeopment Ongoing:
 
 ![](public/CMS_diagram.jpg)
 
+#Technology
+- Node.js
+- HTML5/CSS3
+- Template Engine EJS
+- JavaScript
+- Mongodb Atlas [Cloud]
 
 #FRONTEND
-- Template Engine EJS
-- Admin Login, Logout, Dashboard, View all users, Add new user, Modify users
-- User Login, Dashboard
+- User login
+- Admin dashboard, View all users, Add new user, Modify users
+- Student dashboard
+- Employee dashboard, Create Class & Assign teacher
+- Teacher dashboard, Add students to class, Create a post
 
 #BACKEND
-- Server & Mongodb setup
-- Set up Environment Variables
+- Server & Mongodb setting up
+- Setting up environment variables
 - Handleing Error [improving]
 - Hasing all passwords on save
 - User/Adimn Authentication
-- Cookie based Authorization on different routes
-- Role based page Authorization
+- Role based cookie authorization on different routes
+- Data validation before saving
+- Relational database model
 
 #NPM_DEPENDENCIES
 
@@ -49,4 +60,4 @@ Develeopment Ongoing:
 - express-ejs-layouts
 - cookie-parser
 - jsonwebtoken
-- validator"
+- validator
