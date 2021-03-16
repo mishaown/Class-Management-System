@@ -14,7 +14,7 @@ const userAuth = (req, res, next) => {
                 console.log(err.message);
             } else {
                 const usr = await USER.findById(decodedtoken._id);
-                req.user = {_id: usr._id, name: usr.name, role: usr.role}
+                req.user = {_id: usr._id, name: usr.name, role: usr.role, id: usr.id}
                 next();
             }
         })
@@ -34,7 +34,7 @@ const adminAuth = (req, res, next) => {
                 console.log(err.message);
             } else {
                 const usr = await ADMIN.findById(decodedtoken._id);
-                req.user = {_id: usr._id, role: usr.role}
+                req.user = {_id: usr._id, role: usr.role, id: usr.id}
                 next();
             }
         })

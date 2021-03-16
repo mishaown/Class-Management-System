@@ -1,0 +1,169 @@
+<header class="text-center">
+    <h3>Class Management</h3>
+</header>
+<hr>
+<section class="createclass">
+    <div class="container">
+        <!-- <h3>Create a new Class</h3> -->
+        <button class="btn btn-danger" id="createClass">Create Class</button>
+        <div class="row mt-3" id="createClassForm" style="display: none;">
+            <form>         
+                <div class="input-group mb-3">
+                    <select class="form-select" id="classOfDept" disabled>
+                        <option value="CST">Department of Computer Science and Technology</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <select id="selectSemester" class="form-select" required>
+                        <option selected disabled>Select Semester...</option>
+                        <option value="sem1">1st Semester</option>
+                        <option value="sem2">2nd Semester</option>
+                        <option value="sem3">3rd Semester</option>
+                        <option value="sem4">4th Semester</option>
+                        <option value="sem5">5th Semester</option>
+                        <option value="sem6">6th Semester</option>
+                        <option value="sem7">7th Semester</option>
+                        <option value="sem8">8th Semester</option>
+                    </select>
+                </div>
+
+                <div class="input-group mb-3">
+                <select id="selectTeacher" class="form-select" required>
+                    <option value="" selected disabled>Select a teacher...</option>
+                </select>
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" placeholder="Class Name" id="className" required>
+                </div>
+
+                <label for="classDate">Class will start from...</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
+                    <input class="form-control" id="classDate" type="text" placeholder="Date/Month/Year  EX: 01/01/2021">                                               
+                </div>
+
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Publish a notification</label>
+                </div>
+                <button type="button" class="btn btn-primary" id="createClassBtn">Submit</button>
+              </form>
+        </div>
+        <div class="alert alert-success" role="alert" id="success" style="display: none;">
+            New class added!
+          </div>
+    </div>
+</section>
+<hr>
+<section class="listofclass">
+    <div class="container">
+        <h3>List of Classes</h3>
+        <div class="row">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-danger">
+                    <th scope="row">Depertment</th>
+                    <th scope="col">Semester</th>
+                    <th scope="col">Class Name</th>
+                    <th scope="col">Class Teacher</th>
+                    </tr>
+                </thead>
+                <!-- EJS LIST OF USER  -->
+                <% if(typeof classlist != 'undefined') { %> 
+                    <% classlist.forEach((item)=>{ %>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><%= item.classOfDept.toUpperCase() %> </th>
+                                <td><%= item.classSemester %></td>
+                                <td><%= item.className %></td>
+                                <td><%= item.classTeacher %></td>
+                            </tr>
+                            </tbody>
+                    <%}) %>  
+                <% } %> 
+                <!-- END -->
+                </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    let btn = document.getElementById('createClass');
+    let submitBtn = document.getElementById('createClassBtn');
+    let form = document.getElementById('createClassForm');
+    let selectTeacher = document.getElementById('selectTeacher');
+    let success = document.getElementById('success');
+
+    //EVENTS
+    btn.addEventListener('click', createClassBtnClickEvent);
+    submitBtn.addEventListener('click', submitBtnClickEvent)
+
+    //TO GET TECHERS NAME FROM DATABSE AND ASSIGN ON DOM
+    async function createClassBtnClickEvent(event) {
+        event.preventDefault();
+
+        if(form.style.display === 'none'){
+            form.style.display = 'block'
+            btn.innerText = 'Cancel'
+
+        const options = {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json'
+            }
+        }
+
+        const req = await fetch('/employee/getnames', options)
+        const teacher = await req.json();
+
+        teacher.forEach( item => {
+
+            //creating a new option based on teacher's name
+            let option = document.createElement('option');
+            option.value = item._id
+            option.text = item.name
+            
+            //populating options with teacher name
+            selectTeacher.add(option, null);
+        });
+ 
+        } else {
+            form.style.display = 'none';
+            btn.innerText = 'Create Class'
+
+            //Removing option to repopulate again
+            while(selectTeacher.options.length > 0) {
+                selectTeacher.options.remove(0);
+            }
+        }
+    }
+
+    //TO SUBMIT DATA FOR A NEW CLASS
+    async function submitBtnClickEvent(event) {
+        event.preventDefault();
+        
+        let classOfDept = document.getElementById('classOfDept').value;
+        let classSemester = document.getElementById('selectSemester').value; 
+        let classTeacher = selectTeacher.value; 
+        let className = document.getElementById('className').value;
+
+        const options = {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({classOfDept, classSemester, classTeacher, className})
+          }
+
+        const req = await fetch('/employee/new-class', options);
+        const res = await req.json();
+
+        if (res.success === true) {
+            console.log('success');
+            // window.location.reload();
+        }
+        
+    }
+
+</script> 

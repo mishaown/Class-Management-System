@@ -1,0 +1,24 @@
+<div class="container-sm">
+    <div class="row py-3">
+
+        <div class="col-md-3">
+            <div class="sticky-top">
+            <%- include('./header')  %> 
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <!-- Dashboard -->
+            <% if ( typeof dashboard != 'undefined') {%>
+                <%- include('./dashboard') %>
+                <%  }   %>  
+            <!-- Dashboard -->
+
+            <!-- Dashboard -->
+            <% if ( typeof classmanage != 'undefined') {%>
+                <%- include('./class_manage') %>
+                <%  }   %>  
+            <!-- Dashboard -->
+        </div>
+    </div>
+</div>

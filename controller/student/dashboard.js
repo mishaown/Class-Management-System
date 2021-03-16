@@ -4,5 +4,5 @@
 
 exports.dash_student = (req, res, next) => {
     
-    res.status(200).render('student_dash', {title: 'Student Dashboard'});
+    res.status(200).render('student/student_dash', {title: 'Student Dashboard'});
 }

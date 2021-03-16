@@ -7,7 +7,8 @@ const route = require('./router');
 const ejs_layout = require('express-ejs-layouts');
 
 const app = express();
-app.use(express.static('public'));
+app.use(express.static("public"));
+
 
 //EJS
 app.use(ejs_layout);
@@ -25,7 +26,6 @@ app.use(express.urlencoded({extended: false}));
 //COOKIE PARSER
 app.use(cookieParser());
 app.use(express.json());
-
 
 //routes
 app.use('/', route);

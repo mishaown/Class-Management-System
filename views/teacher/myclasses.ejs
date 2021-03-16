@@ -1,0 +1,23 @@
+<section>
+        <div class="title">
+            <h1>My Classes</h1>
+            <p>Your entitled classes are shown here. </p>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- EJS LIST OF USER  -->
+                <% if(typeof classlist != 'undefined') { %> 
+                    <% classlist.forEach((item)=>{ %>
+                        <div class="card text-center">
+                            <h5><%= item.className %></h5>
+                            <p><%= item.classSemester %></p>
+                            <a href="/teacher/myclasses/<%= item.classID %>">
+                                Add Students
+                            </a>
+                        </div>
+                    <%}) %>  
+                    <% } %> 
+                <!-- END -->
+            </div>
+        </div>
+</section>  

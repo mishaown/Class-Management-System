@@ -4,5 +4,5 @@
 
 exports.dash_teacher = (req, res, next) => {
     
-    res.status(200).render('teacher_dash', {title: 'Teacher Dashboard'});
+    res.status(200).render('teacher/teacher_dash', {title: 'Teacher Dashboard', dashboard: true, usr_name: req.user.name, usr_id: req.user.id});
 }

@@ -1,28 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Employee Dashboard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Create User</a>
-      </li>      
-      <li class="nav-item">
-        <a class="nav-link" href="#">Modify User</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <a class="navbar-brand" href="#"><i class="fas fa-user-secret"></i> </a>
-      <button class="btn btn-outline-warning my-2 my-sm-0">Logout</button>
-    </form>
+<!-- VERTICAL NAVIGATION BAR -->
+
+<div class="vertical-nav bg-white">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+      <!-- <img src="" alt="" width="80" height="80" class="mr-3"> -->
+      <div class="media-body">
+        <h4 class="m-0"><%= usr_name %> </h4>
+        <p class="font-weight-normal text-muted mb-0"> <%= usr_id %>  </p>
+      </div>
+    </div>
   </div>
-</nav>
+
+  <h5 class="text-gray font-weight-bold text-uppercase px-3 fs-5 pb-4 mb-0">Dashboard</h5>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a class="nav-link text-dark bg-light" href="/employee/">
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i> Home
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark bg-light" href="#">
+        <i class="mr-3 text-primary far fa-newspaper"></i>Your Notice</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-dark bg-light" href="/employee/classmanage">
+        <i class="mr-3 text-primary fas fa-chart-bar"></i>Class Manage</a>
+    </li>      
+    <li class="nav-item">
+      <a class="nav-link text-dark bg-light" href="#">
+        <i class="mr-3 text-primary fas fa-chart-bar"></i>Create Notice</a>
+    </li>
+  </ul>
+
+  <h5 class="text-gray font-weight-bold text-uppercase px-3 fs-5 pt-4 pb-4 mb-0">
+    Your Profile</h5>
+
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a class="nav-link text-dark bg-light" href="/logout">
+        <i class="mr-3 text-primary fas fa-user-secret"></i> Logout
+      </a>
+    </li>
+  </ul>
+  
+</div>

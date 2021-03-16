@@ -1,0 +1,33 @@
+
+<div class="container">
+<div class="row py-3">
+
+    <div class="col-3 order-1">
+        <div class="sticky-top">
+            <%- include('./header') %>
+        </div>
+    </div>
+    
+    <div class="col">
+        <!-- create user -->
+        <% if ( typeof createuser != 'undefined') {%>
+        <%- include('./createuser') %>
+        <%  }   %> 
+        <!-- create user -->
+        
+        <!-- All users -->
+        <% if ( typeof allusers != 'undefined') {%>
+            <%- include('./allusers') %>
+            <%  }   %> 
+        <!-- All user -->
+        
+            <!-- Modify user -->
+        <% if ( typeof modifyuser != 'undefined' ) {%>
+            <%- include('./modifyuser') %>
+            <%  }   %> 
+            <!-- Modify user -->
+    </div>
+</div>
+</div>
+    
+    

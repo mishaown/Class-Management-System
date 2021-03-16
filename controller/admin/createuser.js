@@ -23,7 +23,7 @@ const handleError = (err)=> {
 // @ACCESS  Private
 exports.createUser = (req, res) => {
 
-    res.render('admin_dash', {title: 'Create New User', createuser: true})
+    res.render('admin/admin_dash', {title: 'Create New User', createuser: true})
 }
 
 // @ROUTE   POST /admin/create
@@ -39,11 +39,11 @@ exports.createUser_POST = async (req, res) => {
 
         if(isSaved) {
             errors.push({msg: 'New User Added'});
-            return res.status(201).render('admin_dash', {title: 'Register New User', createuser: true, success: {message: 'New User Added'}})
+            return res.status(201).render('admin/admin_dash', {title: 'Register New User', createuser: true, success: {message: 'New User Added'}})
         } else {
 
             errors.push({msg: 'Can not create user now'});
-            return res.status(400).render('admin_dash', {title: 'Register New User', createuser: true, errors})
+            return res.status(400).render('admin/admin_dash', {title: 'Register New User', createuser: true, errors})
         }
     
     } catch (err) {

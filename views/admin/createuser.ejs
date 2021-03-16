@@ -6,7 +6,7 @@
 		<%- include('../partials/messages')  %> 
 		<!-- END -->
 		<form action="/admin/create" method="POST">
-			<select class="custom-select my-2 mr-sm-2" id="role" name="role">
+			<select class="custom-select my-2 mr-sm-2" id="role" name="role" required>
 				<option value="" selected>Choose...</option>
 				<option value="student">Student</option>
 				<option value="teacher">Teacher</option>
@@ -18,7 +18,7 @@
 				type="text"
 				name="id" 
 				class="form-control my-1 mr-2"
-				value="<%= typeof id != 'undefined' ? id : '' %>">
+				value="<%= typeof id != 'undefined' ? id : '' %>" required>
 			</div>
 			<div class="form-group">
 				<label for="name">User Name</label>
@@ -26,7 +26,7 @@
 				type="text" 
 				name="name" 
 				class="form-control my-1 mr-2"
-				value="<%= typeof name != 'undefined' ? name : '' %>">
+				value="<%= typeof name != 'undefined' ? name : '' %>" required>
 			</div>
 			<div class="form-group">
 				<label for="name">Email</label>
@@ -34,7 +34,7 @@
 				type="email" 
 				name="email" 
 				class="form-control my-1 mr-2"
-				value="<%= typeof email != 'undefined' ? email : '' %>">
+				value="<%= typeof email != 'undefined' ? email : '' %>" required>
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label>

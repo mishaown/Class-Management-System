@@ -1,0 +1,29 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-size: 1rem;
+  }
+footer {
+  position: fixed;    
+  left: 0;   
+  bottom: 0;  
+  width: 100%; 
+  text-align: center
+}
+.login_form {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-around;
+    float: none;
+}
+.bg {
+      background-color: #ffffff;
+      background-image: url("./Flat-Mountains.svg");
+      height: 100%; 
+      width: auto;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+  }

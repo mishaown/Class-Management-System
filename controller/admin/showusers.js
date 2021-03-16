@@ -21,7 +21,7 @@ exports.allusers = async (req, res, next) => {
                 });
             })
 
-        return res.render('admin_dash', {title: 'List of all users', userinfo, allusers: true})
+        return res.render('admin/admin_dash', {title: 'List of all users', userinfo, allusers: true})
         }
         
     } catch (error) {

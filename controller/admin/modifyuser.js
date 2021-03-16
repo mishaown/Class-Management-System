@@ -26,7 +26,7 @@ exports.modifyuser = async (req, res, next) => {
         
         if(!users) 
         return res.status(400)
-        .render('admin_dash', {modifyuser: true, title: 'List of all users'});
+        .render('admin/admin_dash', {modifyuser: true, title: 'List of all users'});
 
         let userinfo = []
         
@@ -42,7 +42,7 @@ exports.modifyuser = async (req, res, next) => {
             })
 
 
-        res.render('admin_dash', 
+        res.render('admin/admin_dash', 
             { modifyuser: true, title: 'List of all users', userinfo});
         }
         

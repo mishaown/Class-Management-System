@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row py-3">
+
+        <div class="col-md-4">
+            <div class="sticky-top">
+            <%- include('./header')  %> 
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <!-- Dashboard -->
+            <% if ( typeof dashboard != 'undefined') {%>
+                <%- include('./dashboard') %>
+                <%  }   %>  
+            <!-- Dashboard -->
+
+            <!-- My Articles -->
+            <% if ( typeof myarticles != 'undefined') {%>
+                <%- include('./myarticles') %>
+                <%  }   %> 
+            <!-- My Articles -->
+
+            <!-- My Articles -->
+            <% if ( typeof newarticle != 'undefined') {%>
+                <%- include('./createarticle') %>
+                <%  }   %> 
+            <!-- My Articles -->    
+
+            <!-- My classes -->
+            <% if ( typeof myclasses != 'undefined') {%>
+                <%- include('./myclasses') %>
+                <%  }   %> 
+            <!-- My Classes-->   
+            <!-- Add Students -->
+            <% if ( typeof addstudents != 'undefined') {%>
+                <%- include('./addstudents') %>
+                <%  }   %> 
+            <!-- Add Students-->    
+        </div>
+    </div>
+</div>
+

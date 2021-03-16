@@ -58,8 +58,7 @@ exports.login_POST = async (req, res, next) => {
         res.status(200).json(payload)
 
     } catch (err) {
-      console.log(err.message);
         const errors = handleErrors(err);
-        res.status(400).json(errors);
+        res.status(400).json({errors})
     }
-} 
+}  
