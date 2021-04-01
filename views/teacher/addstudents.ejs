@@ -6,8 +6,35 @@
         <form class="form-inline mb-4" id="search">
     </div>
         </form> 
-        <h3 class="title">Student List</h3>
-    
+        <h3 class="title">Added Students</h3>
+
+        <table class="table table-hover">
+          <thead> 
+            <tr class="table-danger">
+              <th scope="col">Student ID</th>
+              <th scope="col">Student Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <!-- EJS LIST OF USER  -->
+          <% if(typeof studentinfo!= 'undefined') { %> 
+              <% studentinfo.forEach((student)=>{ %>
+                  <tbody>
+                      <tr>
+                        <td><%= student.studentID %></td>
+                        <td><%= student.studentName %></td>
+                        <td>
+                          <button onclick="thisuser(this)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmbtn">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                      </tr>
+                    </tbody>
+              <%}) %>  
+          <% } %> 
+          <!-- END -->
+        </table>
+
         <table class="table table-hover">
             <thead> 
               <tr class="table-danger">
@@ -86,7 +113,9 @@
   
           const data = await req.json();
 
-          console.log(data);
+          if (data.success === true) {
+              location.reload();
+          }
 
         })
     }

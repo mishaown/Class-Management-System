@@ -1,0 +1,86 @@
+<section>
+    <div class="container">
+        <h3>Attendance Activity</h3>
+        <hr>
+        <div class="input-group mb-3">
+            <select id="className" class="form-select form-select-lg mb-3" aria-label=".form-select-lg" aria-placeholder="Select a Class">
+                <% if(typeof Class != 'undefined') { %> 
+                    <% Class.forEach((item)=>{ %>
+            
+                        <option value="<%= item.class_id %>"><%= item.className %></option>
+            
+                        <%}) %>  
+                <% } %> 
+                <!-- END -->
+              </select>
+        </div>
+        <button id="searchbtn" class="btn btn-warning">Search</button>
+
+    <div id="attendanceTable" class="row md-6" style="background-color: white; display: block;">       
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="row">DATE</th>
+                    <th scope="row">Student ID</th>
+                    <th scope="row">Student Name</th>
+                    <th scope="row">Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="list">
+
+            </tbody>
+        </div>
+    </div>
+</section>
+
+<script>
+    
+    const SEARCH_BUTTON = document.querySelector('#searchbtn');
+    const attendanceTable = document.querySelector('#attendanceTable');
+    let list = document.querySelector('#list');
+
+    //EVENTS
+    SEARCH_BUTTON.addEventListener('click', searchBtnClickEvent);
+
+    //FUNCTIONS
+    async function searchBtnClickEvent(event) {
+        event.preventDefault();
+
+        const _id = document.querySelector('#className').value;
+
+        const options = {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json'
+            }
+        }
+
+        const req = await fetch(`/teacher/get-Class-Date/${_id}`, options)
+        const data = await req.json();
+        
+        if (data.success === true) {
+
+            data.classAttendance.filter(element => {
+                
+                const date = element.sessionDate;
+
+                element.attendances.filter(element => {
+
+                //INSERT TABLE ELEMENT  
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${date.split('T')[0]}</td>
+                    <td>${element.stu_ID} </td>
+                    <td>${element.stu_name} </td>
+                    <td>${element.status} </td>
+                    `;
+
+                list.appendChild(row)
+                });
+            });
+            date = '';
+        }
+    }
+</script>

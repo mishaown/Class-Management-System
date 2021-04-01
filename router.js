@@ -21,6 +21,8 @@ const { userLogin, userLogin_POST} = require('./controller/login');
 const { dash_teacher } = require('./controller/teacher/dashboard');
 const { getmyarticles, newarticle, postarticle } = require('./controller/teacher/articles');
 const { myclasses, addstudents, addstudentstoclass } = require('./controller/teacher/myclasses');
+const { ta_page, takeattendance }   = require('./controller/teacher/takeattend');
+const { att_act, getDates } = require('./controller/teacher/activity');
 
 //EMPLOYEE CONTROLLERS
 const { dash_employee } = require('./controller/employee/dashboard');
@@ -48,7 +50,10 @@ router.post('/teacher/postarticle', userAuth ,authorize('teacher'), postarticle)
 router.get('/teacher/myclasses', userAuth, authorize('teacher'), myclasses);
 router.get('/teacher/myclasses/:_id', userAuth, authorize('teacher'), addstudents);
 router.post('/teacher/add-student-to-class', userAuth, authorize('teacher'), addstudentstoclass);
-
+router.get('/teacher/myclasses/t-a/:_id', userAuth, authorize('teacher'), ta_page); 
+router.post('/teacher/myclasses/t-a/:_id', userAuth, authorize('teacher'), takeattendance);
+router.get('/teacher/attendance_activity', userAuth, authorize('teacher'), att_act);
+router.post('/teacher/get-Class-Date/:_id', userAuth, authorize('teacher'), getDates);
 
 //EMPLOYEE ROUTE
 router.get('/employee',userAuth , authorize('employee'), dash_employee);

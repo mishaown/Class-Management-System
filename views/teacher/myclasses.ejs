@@ -1,23 +1,38 @@
-<section>
-        <div class="title">
-            <h1>My Classes</h1>
-            <p>Your entitled classes are shown here. </p>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <!-- EJS LIST OF USER  -->
-                <% if(typeof classlist != 'undefined') { %> 
-                    <% classlist.forEach((item)=>{ %>
-                        <div class="card text-center">
-                            <h5><%= item.className %></h5>
-                            <p><%= item.classSemester %></p>
-                            <a href="/teacher/myclasses/<%= item.classID %>">
-                                Add Students
-                            </a>
-                        </div>
-                    <%}) %>  
-                    <% } %> 
-                <!-- END -->
-            </div>
-        </div>
-</section>  
+<h3 class="title">Enrolled Classes</h3>
+
+<table class="table table-hover">
+  <thead> 
+    <tr class="table-danger">
+      <th>Class Name</th>
+      <th>Semester</th>
+      <th>Add Students</th>
+      <th>Take Attendance</th>
+    </tr>
+  </thead>
+  <!-- EJS LIST OF USER  -->
+  <% if(typeof classlist != 'undefined') { %> 
+      <% classlist.forEach((item)=>{ %>
+          <tbody>
+              <tr>
+                <td><%= item.className %></td>
+                <td><%= item.classSemester %></td>
+                <td>
+                    <button type="button" class="btn btn-warning">
+                        <a href="/teacher/myclasses/<%= item.classID %>">
+                            Add Students
+                        </a>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning">
+                        <a href="/teacher/myclasses/t-a/<%= item.classID %>">
+                            Take Attendance
+                        </a>
+                    </button>            
+                </td>
+              </tr>
+            </tbody>
+      <%}) %>  
+  <% } %> 
+  <!-- END -->
+</table>

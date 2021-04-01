@@ -1,5 +1,7 @@
 const CLASS = require('../../model/class');
 const USER = require('../../model/users');
+const ATTENDANCE_RECORD = require('../../model/attendance');
+
 
 // @ROUTE   GET /teacher/my-classes
 // @DEC     Route for employees
@@ -8,7 +10,7 @@ const USER = require('../../model/users');
 exports.myclasses = async (req, res, next) => {
 
     try {
-        const classes = await CLASS.find();
+        const classes = await CLASS.find({classTeacherID: req.user.id});
         let classlist = [];
 
         classes.forEach( item => {
@@ -35,9 +37,18 @@ exports.addstudents = async(req, res)=> {
         
         const _id = req.params._id;
         const classes = await CLASS.findById(_id);
-        const users = await USER.find({role: 'student'});
+        const users = await USER.find({role: 'student'});        
 
         let userinfo = []
+        let studentinfo = []
+
+
+        for (var i=0; i<classes.classStudents.length; i++) {
+            studentinfo.push({
+                studentID: classes.classStudents[i].studentID,
+                studentName: classes.classStudents[i].studentName 
+            })
+        }
 
         if(users){ 
             users.forEach((user)=>{
@@ -50,7 +61,7 @@ exports.addstudents = async(req, res)=> {
         }
 
         res.status(200)
-        res.render('teacher/teacher_dash', {title: 'Enroller Classes', classes, userinfo ,addstudents: true, usr_name: req.user.name, usr_id: req.user.id});
+        res.render('teacher/teacher_dash', {title: 'Enroller Classes', classes, userinfo, studentinfo ,addstudents: true, usr_name: req.user.name, usr_id: req.user.id});
 
 
     } catch (error) {
@@ -72,14 +83,21 @@ exports.addstudentstoclass = async(req, res, next)=> {
             _id: classID
         }, {
             $push: {
-                classStudents: studentID
+                classStudents: {
+                    studentID, studentName
+                }
             }
         })
-        
+        const record = await ATTENDANCE_RECORD.create({
+            student_id: studentID,
+            Class: {
+                class_id: classID
+            }
+        })
+
+        console.log('New Record Created!');
+
         if (isSaved) {
-        
-            console.log(isSaved);
-            
             res.status(200).json({success: true, isSaved})
         }
         else{

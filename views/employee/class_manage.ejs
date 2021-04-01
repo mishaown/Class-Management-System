@@ -39,7 +39,7 @@
                 <label for="classDate">Class will start from...</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
-                    <input class="form-control" id="classDate" type="text" placeholder="Date/Month/Year  EX: 01/01/2021">                                               
+                    <input class="form-control" id="classDate" type="date" placeholder="Date/Month/Year  EX: 01/01/2021">                                               
                 </div>
 
                 <div class="mb-3 form-check">
@@ -147,21 +147,22 @@
         let classSemester = document.getElementById('selectSemester').value; 
         let classTeacher = selectTeacher.value; 
         let className = document.getElementById('className').value;
+        let classStart = document.getElementById('classDate').value;
 
         const options = {
             method: 'POST',
             headers: { 
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({classOfDept, classSemester, classTeacher, className})
+            body: JSON.stringify({classOfDept, classSemester, classTeacher, className, classStart})
           }
 
         const req = await fetch('/employee/new-class', options);
         const res = await req.json();
 
+        console.log(res);
         if (res.success === true) {
-            console.log('success');
-            // window.location.reload();
+            location.reload();
         }
         
     }

@@ -62,15 +62,17 @@ exports.getClasses = async (req, res, next)=>{
 exports.newClass = async(req, res, next) => {
     try {
 
-        const { classOfDept, classSemester, classTeacher, className } = req.body;
+        const { classOfDept, classSemester, classTeacher, className, classStart } = req.body;
+
+        let data = [];
 
         const teacher = await USER.findById(classTeacher)
 
-        const saved = await CLASS.create({ classOfDept, className, classSemester, classTeacherName: teacher.name, classTeacherID: teacher.id })
+        const saved = await CLASS.create({ classOfDept, className, classSemester, classStart, classTeacherName: teacher.name, classTeacherID: teacher.id, classAttendance: data})
 
         if (saved) {
-
-            return res.status(200).json({success: true})
+            
+            res.status(200).json({success: true})
 
         } else {
             res.status(400).send('Can not save')

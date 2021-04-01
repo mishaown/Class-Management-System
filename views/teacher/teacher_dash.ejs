@@ -35,7 +35,17 @@
             <% if ( typeof addstudents != 'undefined') {%>
                 <%- include('./addstudents') %>
                 <%  }   %> 
-            <!-- Add Students-->    
+            <!-- Add Students-->
+            <!-- take attendance -->
+            <% if ( typeof takeattendance != 'undefined') {%>
+                <%- include('./takeattend') %>
+                <%  }   %> 
+            <!-- take attendance -->
+            <!-- attendance-activity -->
+            <% if ( typeof attendance_activity != 'undefined') {%>
+                <%- include('./attendance_activity') %>
+                <%  }   %> 
+            <!-- attendance-activity -->
         </div>
     </div>
 </div>

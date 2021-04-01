@@ -1,0 +1,126 @@
+<header class="text-center">
+    <h3>Take Attendance</h3>
+</header>
+<hr>
+<section>
+    <div class="container" style="background-color: white;">
+        <div class="row-sm-6" style="margin-bottom: 2.5rem;">
+            <p>Class Name:  <Strong><%= className %>  </Strong></p>
+            <p>Enrolled Students:   <Strong><%= count %> </Strong></p>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
+            <strong>Success!</strong> Attendance Recorded!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <div class="row mt-3">
+            <form>
+                <hr>         
+                <div class="input-group mb-6">
+                    <span class="input-group-text">DATE:</span>
+                    <input class="form-control" id="classDate" type="date" placeholder="Date/Month/Year" required>                                               
+                </div>
+                <hr>
+                <div class="row">
+                    <table class="table table-hover" id="studentsTable">
+                        <thead>
+                            <tr class="table-danger">
+                            <th scope="row">Student ID</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <!-- EJS LIST OF USER  -->
+                        <% if(typeof studentinfo != 'undefined') { %> 
+                            <% studentinfo.forEach((item)=>{ %>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" id="studentID"><%= item.studentID %> </th>
+                                        <td><%= item.studentName %></td>
+                                        <td>
+                                            <select id="studentStatus" class="form-select" required>
+                                                <option value="1">Present</option>
+                                                <option value="2">Absent</option>
+                                                <option value="3">Late</option>
+                                                <option value="4">On Leave</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            <%}) %>  
+                        <% } %> 
+                        <!-- END -->
+                    </table>
+                </div>
+                <button type="button" class="btn btn-primary" id="save">Save</button>
+            </form>
+        </div>  
+    </div>
+</section>
+
+<script>
+    let form = document.getElementById('takeattendanceForm');
+    let save = document.getElementById('save');
+    let alert = document.querySelector('.alert');
+
+    //EVENTS
+
+    // takeattendance.addEventListener('click', attendanceModal);
+    save.addEventListener('click', saveAttendance);
+
+    //FUNCTIONS
+    function showAlert(msg, alert_msg) {
+        //Create a div
+        const div = document.createElement('div');
+        div.alert_msg = `alert ${alert_msg}`;
+
+        //Add alert message
+        div.appendChild(document.createTextNode(msg));
+
+        //Grub the place where i want to put this
+        const container = document.querySelector('.container')
+        const form_div = document.querySelector('#form')
+
+        container.insertBefore(div, form_div);
+
+        //Vanish in 3 sec
+        setTimeout(()=>document.querySelector('.alert')
+                .remove(), 3000);
+    }
+
+    
+    async function saveAttendance(event){
+        
+        event.preventDefault();
+        
+        const students = [];
+
+        let date = document.getElementById('classDate').value
+        let table = document.getElementById('studentsTable');
+
+        for (var i = 1; i < table.rows.length; i++) {
+            let studentID = table.rows[i].cells[0].outerText;
+            let studentName = table.rows[i].cells[1].outerText;
+            let studentStatus = table.rows[i].cells[2].childNodes[1].value;
+
+            students.push({studentID, studentName, studentStatus});
+        }
+        
+        const options = {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({date, students})
+          }
+        const req = await fetch('/teacher/myclasses/t-a/<%= class_id %>', options);
+        const res = await req.json();
+
+        if (res.success === true) {
+
+            alert.style.display = 'block';
+            location.reload();
+        } else {
+            alert.style.display = 'none';
+        }
+    }
+</script>
