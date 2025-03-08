@@ -1,7 +1,8 @@
 # Class Management System
 
-A web application built using **Node.js**, **Express**, and **MongoDB** for managing classes, users, and roles within an educational or organizational setting. This project is currently under development.
+A web application built using **Node.js**, **Express**, and **MongoDB** for managing classes, users, and roles within an educational or organizational setting.
 
+==> This project is **no longer actively maintained**. However, if you're interested in contributing, enhancing features, or using it as a base for your projects, feel free to fork and build upon it! It’s a great resource for **bachelor's students** or anyone looking to explore web development with Node.js, Express, and MongoDB. Contributions and improvements are always welcome! 🚀
 ---
 
 ## Features
