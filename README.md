@@ -20,6 +20,25 @@ A web application built using **Node.js**, **Express**, and **MongoDB** for mana
 - **Teacher Dashboard**:
   - Add students to classes.
   - Create and manage posts.
+ 
+### **ROUTES**
+Three different types of user have different sets of accessibility.
+ADMIN: Currently admin routes are not protected.
+- http://localhost:8888/admin/create - Creates a new user
+- http://localhost:8888/admin/users - Shows all the registered users
+- http://localhost:8888/admin/modify - Shows all users and can modify user info
+USERS:
+- http://localhost:8888/login - user login page
+Employee, Teacher or Student if not logged in can’t access routes. Based on login data, user
+will get a different interface.
+Employee:
+- http://localhost:8888/employee/classmanage - creates a class and assigns it to a teacher
+Teacher:
+- http://localhost:8888/teacher/myarticles - Can create article
+- http://localhost:8888/teacher/myclasses - Can see enrolled classes
+- http://localhost:8888/teacher/myclasses/_id - Can add students to a class
+- http://localhost:8888/teacher/myclasses/t-a/_id - Can take attendance of enrolled students
+- http://localhost:8888/teacher/attendance_activity - Shows attendance activity
 
 ### **Backend**
 - **Server & Database Setup**: Configured with MongoDB Atlas (cloud-based).
